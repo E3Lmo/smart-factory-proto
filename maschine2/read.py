@@ -6,6 +6,9 @@ import MFRC522
 import signal
 import time
 import write_blue
+import write_red
+import write_purple
+import write_yellow
 
 continue_reading = True
 
@@ -23,17 +26,17 @@ def get_product(input):
 
     elif input[0] == 22 and input[2] == 0:
         print "Rotes Produkt erkannt ... Produktion wird gestartet"
-        #write_red.process_production(input)
+        write_red.process_production(input)
         print "Bearbeitung abgeschlossen"
 
     elif input[0] == 33 and input[2] == 0:
         print "Lila Produkt erkannt ... Produktion wird gestartet"
-        #write_purple.process_production(input)
+        write_purple.process_production(input)
         print "Bearbeitung abgeschlossen"
 
     elif input[0] == 44 and input[2] == 0:
         print "Gelbes Produkt erkannt ... Produktion wird gestartet"
-        #write_yellow.process_production(input)
+        write_yellow.process_production(input)
         print "Bearbeitung abgeschlossen"
 
     #Ausgabe bei Falscheingabe

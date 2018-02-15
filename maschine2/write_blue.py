@@ -10,17 +10,48 @@ import time
 #########################################################################################
 ################################################################################
 
+#Methode zum Addieren der Produktionszeit
+#Produtkionszeit blau an Maschine2: 10 Sekunden
+def addTime(input, prodTime):
+    totalTime = input + prodTime
+    return totalTime
+
 def process_production(input):
-    print "Der input Wert ist: " , input
+    print "Folgende Daten sind derzeit auf dem Transponder gespeichert:\n" , input
+
+    #Initialisierung der Produktionszeit an Maschine 2
+    prodTime = 10
+    
+    #Auslesen des Status aus dem dritten Wertes im Array
+    curStatus = input[2]
+
+     #Auslesen der bereits benötigten Zeitaufwands aus dem vierten Wertes im Array
+    curTime = input[3]
+
+    #Funktionsaufruf zum Addieren der Zeit
+    totalTime = addTime(curTime, prodTime)
+
+    #Übergabe des Input Arrays an die data Variable
     data = input
 
+    #Hochzaehlen des Status um 1
+    data[2] = curStatus + 1
+
+    #Uebergabe der Produktionszeit (prodTime) an die 4. Stelle des Arrays
+    data[3] = totalTime
+    
+    print "\n"
+    print "Produktion wird gestartet. Die Produktionszeit beträgt: ", prodTime, " Sekunden."
     print "\n"
     print "Produktionsfortschritt:"
-    for i in xrange(10,0,-1):
+
+    #SleepTimer zur Simulation der Produktionszeit
+    for i in xrange(prodTime,0,-1):
         time.sleep(1)
         print i, "..."
 
-    data = [11, 1, 1, 10]  
+    print"\n"
+
     # Fill the data with 0x00
     for x in range(0,16):
                 data.append(0x00)
@@ -80,20 +111,11 @@ while continue_reading:
         # Check if authenticated
         if status == MIFAREReader.MI_OK:
 
-            # Variable for the data to write
-            print "Status ok data auslesen..."
+            # Variable for the data
+            print "Status ok Produktdaten auslesen..."
+            print "\n"
             data = MIFAREReader.MFRC522_Read(8)
             print data
-
-            #Blaues Produkt
-            #process_production(data)
-            #data = [11, 1, 1, 10 , 0]
-            # Fill the data with 0x00
-            
-
-            print "It now looks like this:"
-            # Check to see if it was written
-            print MIFAREReader.MFRC522_Read(8)
             print "\n"
 
             # Stop

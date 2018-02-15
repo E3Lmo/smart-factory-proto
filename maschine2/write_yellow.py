@@ -4,6 +4,65 @@
 import RPi.GPIO as GPIO
 import MFRC522
 import signal
+import time
+
+#Eigene Methoden
+#########################################################################################
+################################################################################
+
+#Methode zum Addieren der Produktionszeit
+#Produtkionszeit gelb an Maschine2: 4 Sekunden
+def addTime(input, prodTime):
+    totalTime = input + prodTime
+    return totalTime
+
+def process_production(input):
+    print "Folgende Daten sind derzeit auf dem Transponder gespeichert:\n" , input
+
+    #Initialisierung der Produktionszeit an Maschine 2
+    prodTime = 4
+    
+    #Auslesen des Status aus dem dritten Wertes im Array
+    curStatus = input[2]
+
+     #Auslesen der bereits benötigten Zeitaufwands aus dem vierten Wertes im Array
+    curTime = input[3]
+
+    #Funktionsaufruf zum Addieren der Zeit
+    totalTime = addTime(curTime, prodTime)
+
+    #Übergabe des Input Arrays an die data Variable
+    data = input
+
+    #Hochzaehlen des Status um 1
+    data[2] = curStatus + 1
+
+    #Uebergabe der Produktionszeit (prodTime) an die 4. Stelle des Arrays
+    data[3] = totalTime
+
+    print "\n"
+    print "Produktion wird gestartet. Die Produktionszeit beträgt: ", prodTime, " Sekunden."
+    print "\n"
+    print "Produktionsfortschritt:"
+
+    #SleepTimer zur Simulation der Produktionszeit
+    for i in xrange(prodTime,0,-1):
+        time.sleep(1)
+        print i, "..."
+
+    print"\n"
+
+    # Fill the data with 0x00
+    for x in range(0,16):
+                data.append(0x00)
+
+    print "Now we fill it with 0x00:"
+    MIFAREReader.MFRC522_Write(8, data)
+    
+    continue_reading = False
+
+################################################################################
+################################################################################
 
 continue_reading = True
 
@@ -52,41 +111,11 @@ while continue_reading:
         # Check if authenticated
         if status == MIFAREReader.MI_OK:
 
-            # Variable for the data to write
-            data = []
-
-            # Fill the data with 0xFF
-            for x in range(0,16):
-                data.append(0xFF)
-
-            print "Sector 8 looked like this:"
-            # Read block 8
-            print MIFAREReader.MFRC522_Read(8)
+            # Variable for the data
+            print "Status ok Produktdaten auslesen..."
             print "\n"
-
-            print "Sector 8 will now be filled with 0xFF:"
-            # Write the data
-            MIFAREReader.MFRC522_Write(8, data)
-            print "\n"
-
-            print "It now looks like this:"
-            # Check to see if it was written
-            print MIFAREReader.MFRC522_Read(8)
-            print "\n"
-
-            #Blaues Produkt
-            data = [44, 4, 0, 0 , 0]
-            # Fill the data with 0x00
-            for x in range(0,16):
-                data.append(0x00)
-
-            print "Now we fill it with 0x00:"
-            MIFAREReader.MFRC522_Write(8, data)
-            print "\n"
-
-            print "It now looks like this:"
-            # Check to see if it was written
-            print MIFAREReader.MFRC522_Read(8)
+            data = MIFAREReader.MFRC522_Read(8)
+            print data
             print "\n"
 
             # Stop

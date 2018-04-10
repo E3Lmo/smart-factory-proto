@@ -35,5 +35,11 @@ In der nachfolgenden Tabelle ist die aktuelle Belgung der Sektoren in einem RFID
 |     15 |               |      |     |      |      |
 |     16 |               |      |     |      |      |
 
+## Benötigte Komponenten
+
+## Vorbereitung
+
+## Installation der Maschine(n)
+
 ## Usage
 

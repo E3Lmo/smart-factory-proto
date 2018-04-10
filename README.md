@@ -118,7 +118,7 @@ Jetzt ist die Maschine 1 gestartet und es müsste sich eine grafische Bedienober
 ***Für Maschine 2***
 
 1. `cd smart-factory-proto/maschine2`
-2. `python main.py`
+2. `python main_maschine2.py`
 
 ***Für Maschine 3***
 

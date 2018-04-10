@@ -108,29 +108,29 @@ Visuell sollte nun ein neuer Ordner auf dem Desktop erschienen sein.
 
 Wenn wir uns nun weiter im Terminal befinden wählen wir nun den entsprechenden Ordner `cd` an und starten die Maschine. Im Folgenden sind die Schritte nun für jede Maschine (1-5) erklärt.
 
-***Für Maschine 1 ***
+***Für Maschine 1***
 
 1. `cd smart-factory-proto/maschine1`
 2. `python main.py`
 
 Jetzt ist die Maschine 1 gestartet und es müsste sich eine grafische Bedienoberfläche geöffnet haben. Wenn wir nun ein Produkt wählen, können wir den Chip mit den gewählten Daten beschreiben.
 
-***Für Maschine 2 ***
+***Für Maschine 2***
 
 1. `cd smart-factory-proto/maschine2`
 2. `python main.py`
 
-***Für Maschine 3 ***
+***Für Maschine 3***
 
 1. `cd smart-factory-proto/maschine3`
 2. `python main_maschine3.py`
 
-***Für Maschine 4 ***
+***Für Maschine 4***
 
 1. `cd smart-factory-proto/maschine4`
 2. `python main_maschine4.py`
 
-***Für Maschine 5 ***
+***Für Maschine 5***
 
 1. `cd smart-factory-proto/maschine5`
 2. `python main_maschine5.py`
